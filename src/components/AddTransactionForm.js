@@ -10,15 +10,14 @@ export default function AddTransactionForm({onAdd}){
   });
   const handleInputChange = (event) => {
        const {name, value} = event.target;
-       //object property shorthand syntax :  [name]: value
-       // dynamically sets a property on the object 
+      
        setNewTransaction({...newTransaction, [name]: value})
   }
 
   const handleSubmit = (event) => {
        event.preventDefault();
        onAdd(newTransaction);
-       // resetting the input box
+      
        setNewTransaction({description: '' , amount: '' , date: '' , category: ''})
   }
      return (

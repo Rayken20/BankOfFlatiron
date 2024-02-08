@@ -8,14 +8,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from 'react';
 
 function App() {
-  // state to hold transactions 
+  
   const [transactions, setTransactions] = useState([]);
-  //using a copy of the search value
+ 
   const [term,setTerm] = useState('');
   const [sortType, setSortType] = useState(null); 
-
-
-  // as the component mounts , this will run initially 
+  const [editTransactionId, setEditTransactionId] = useState(null);
+  const [editFormVisible, setEditFormVisible] = useState(false);
+ 
   useEffect(() => 
   {
       fetchTransaction();
@@ -35,10 +35,10 @@ function App() {
   }
 
   const handleSearch = async (searchValue) => {
-    // console.log("from app.js " , searchValue)
+    
     setTerm(searchValue)
     console.log(term)
-    // from using the search value to filter my shared transactions
+    
   }
 
 
@@ -56,7 +56,7 @@ function App() {
              body: JSON.stringify(newTransaction)
           });
           if(response.ok){
-                //re render 
+                
                 fetchTransaction(); 
           }else {
                console.log('Error adding transaction ' , response.statusText)
@@ -81,13 +81,13 @@ function App() {
     }
 }
 
-//sort function 
+
 const handleSort = (type) => {
    if(sortType === type){
          setSortType(null);
    } else {
     setSortType(type);
-    // making a copy of the transactions array to be used for sorting purposes as per the type 
+   
     const sortedTransactions = [...transactions]
 
     if(type === 'category'){
